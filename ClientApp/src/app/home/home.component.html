@@ -1,14 +1,75 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<h1>{{title}}</h1>
+<p>Welcome to Sarah's tech test attempt. Insert the inputs below</p>
+<p>Please put in whole percentages. I.e if you want to put in 2.5%, input 2.5 (not 0.025)
+
+<div>
+  <div>
+    <label>Year One Sales ($) : </label>
+    <input type="number" name="yearOneSales" value="0" [(ngModel)]="yearOneSales">
+  </div>
+  <div>
+    <label>Base Rent (Year 1-5) ($) : </label>
+    <input type="number" name="baseRentYearOneToFive" value="0" [(ngModel)]="baseRentYearOneToFive">
+  </div>
+  <div>
+    <label>Base Rent (Year 6-10) ($) :</label>
+    <input type="number" name="baseRentYearSixToTen" value="0" [(ngModel)]="baseRentYearSixToTen">
+  </div>
+  <div>
+    <label>Percentage Rent Tier 1 (%) : </label>
+    <input type="number" name="percentageRentTierOne" value="0" [(ngModel)]="percentageRentTierOne">
+  </div>
+  <div>
+    <label>Percentage Rent Tier 2 (%) : </label>
+    <input type="number" name="percentageRentTierTwo" value="0" [(ngModel)]="percentageRentTierTwo">
+  </div>
+  <div>
+    <label>Percentage Rent Tier 3 (%) : </label>
+    <input type="number" name="percentageRentTierThree" value="0" [(ngModel)]="percentageRentTierThree">
+  </div>
+  <div>
+    <label>Compounding annual sales growth (from year 2) (%) : </label>
+    <input type="number" name="compoundingAnnualSalesGrowth" value="0" [(ngModel)]="compoundingAnnualSalesGrowth">
+  </div>
+</div>
+
+<br>
+<button (click)="calculateRentProfile()">Calculate</button>
+<br>
+<br>
+<h2>Results Table</h2>
+
+<table class='table table-striped' aria-labelledby="tableLabel">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Year Sales</th>
+      <th>Base Rent</th>
+      <th>Tier 1 (low end bracket)</th>
+      <th>Tier 2 (low end bracket)</th>
+      <th>Tier 3 (low end bracket)</th>
+      <th>Tier 1 rent</th>
+      <th>Tier 2 rent</th>
+      <th>Tier 3 rent</th>
+      <th>Total Percentage rent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let yearProfile of yearProfiles">
+      <td>{{ yearProfile.year }}</td>
+      <td>{{ yearProfile.yearSales }}</td>
+      <td>{{ yearProfile.baseRent}}</td>
+      <td>{{ yearProfile.tierOneLowerBracket}}</td>
+      <td>{{ yearProfile.tierTwoLowerBracket }}</td>
+      <td>{{ yearProfile.tierThreeLowerBracket }}</td>
+
+      <td>{{ yearProfile.tierOneRent}}</td>
+      <td>{{ yearProfile.tierTwoRent }}</td>
+      <td>{{ yearProfile.tierThreeRent }}</td>
+
+      <td>{{yearProfile.totalPercentageRent}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
